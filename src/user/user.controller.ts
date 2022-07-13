@@ -8,14 +8,18 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { isValidObjectId } from 'mongoose';
+import RoleGuard from 'src/auth/guard/role.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('User')
+@ApiBearerAuth()
 @Controller('users')
+@UseGuards(RoleGuard(['admin']))
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
