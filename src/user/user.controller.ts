@@ -14,6 +14,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { isValidObjectId } from 'mongoose';
 import RoleGuard from 'src/auth/guard/role.guard';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('User')
@@ -52,7 +53,7 @@ export class UserController {
 
   @Put('/:id')
   @ApiOperation({ summary: 'Edit User' })
-  updateUser(@Param('id') id: string, @Body() payload: CreateUserDto) {
+  updateUser(@Param('id') id: string, @Body() payload: UpdateUserDto) {
     if (!isValidObjectId(id)) {
       throw new BadRequestException('Invalid id');
     }
