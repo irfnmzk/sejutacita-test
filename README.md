@@ -1,73 +1,68 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# User Crud API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository contains User Crud Api for SejutaCita technical/coding test
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Technical Stack
 
-## Description
+- [x] NestJs for web framework
+- [x] Mongoose for ORM
+- [x] Kubernetes deployment
+- [x] MongoDB for data persistance
+- [x] Swagger for API documentation
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Accessing the API and swagger docs
 
-## Installation
+- Once you launch the API it will be accessible on port 3000.
+- Swagger docs for the API will be accessible locally via URI "**<http://localhost:3000/docs/>**"
 
-```bash
-$ npm install
+## Admin credentials
+
+```sh
+  username : admin@example.com
+  password : password
 ```
 
-## Running the app
+## Working with this Project
 
-```bash
-# development
-$ npm run start
+### Development
 
-# watch mode
-$ npm run start:dev
+For development purpose it is possible to deploy all service using docker compose, when you make changes to code, the services will automatically restarted
 
-# production mode
-$ npm run start:prod
+```sh
+# start
+docker compose up --build
+
+# stop
+docker compose down
 ```
 
-## Test
+### Production with kubernetes
 
-```bash
-# unit tests
-$ npm run test
+To deploy the whole app to the cluster, run the following commands.
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```sh
+kubectl apply -f k8s/
 ```
 
-## Support
+To see the status of the deployment, run the following command:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```sh
+kubectl get deployments
+```
 
-## Stay in touch
+now you can access the api from http://\<clusterHost\>:3000 if you're using minikube you can access it with
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```sh
+# start minikube tunnel
+minikube tunnel
 
-## License
+# you can access it from http://localhost:3000
+```
 
-Nest is [MIT licensed](LICENSE).
+### Remove Services
+
+After deploying the app to the cluster, you can remove the services by running the following commands:
+
+```sh
+kubectl delete -f k8s/
+```
