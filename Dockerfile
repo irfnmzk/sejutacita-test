@@ -1,5 +1,5 @@
 # Development
-FROM node:18.3.0-alpine3.14 AS development
+FROM node:18.3.0 AS development
 
 WORKDIR /usr/src/app
 

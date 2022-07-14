@@ -6,7 +6,7 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/sejutacita'),
+    MongooseModule.forRoot('mongodb://mongo/sejutacita'),
     AuthModule,
     UserModule,
   ],
