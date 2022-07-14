@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { JwtAuthGuard } from './guard/jwt-auth.guard';
 
 @ApiTags('Auth')
@@ -19,5 +20,10 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   async me(@Req() req: any): Promise<any> {
     return this.authService.getUser(req.user.id);
+  }
+
+  @Post('refresh')
+  async refresh(@Body() payload: RefreshTokenDto) {
+    return this.authService.refreshAccessToken(payload.refreshToken);
   }
 }
